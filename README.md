@@ -12,3 +12,6 @@ https://www.crockford.com/base32.html
 
 base32-crockford.py is from
 https://github.com/jbittel/base32-crockford/
+
+Use at your own risk.
+

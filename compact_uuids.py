@@ -8,8 +8,8 @@ import sys
 
 def uuid_to_str26( _uuid: uuid ) -> str:
     '''
-    In: uuid string, e.g. 448096f0-12b4-11e6-88f1-180373e5e84a
-    Returns: compact 26-char representation of incoming uuid
+    In: uuid
+    Returns: 26-char representation of uuid
     '''
     res = encode( _uuid.int )
     l = len( res )
@@ -19,16 +19,29 @@ def uuid_to_str26( _uuid: uuid ) -> str:
     return res
 
 def str26_to_int( string: str ) -> int:
+    '''
+    In: string, 26char encoding of uuid
+    Returns: Int of uuid
+    '''
     return decode( string )
 
 def uuid_to_str22( _uuid: uuid ) -> str:
-    # uuid is 16 bytes
+    '''
+    In: uuid, 16 bytes
+    Returns 22 char representationof uuid.
+    '''
     barray = _uuid.int.to_bytes( 16, byteorder=sys.byteorder )
     res = base64.urlsafe_b64encode( barray )
     strres = res.decode()
+    # discard padding '='
     return strres[:-2]
 
 def str22_to_int( string: str ) -> int:
+    '''
+    In: 22char encoding of uuid
+    Returns Int of uuid
+    '''
+    # restore padding and make a byte array
     ba = bytearray( string + '==', encoding="utf-8" )
     barray = base64.urlsafe_b64decode( ba )
     return int.from_bytes( barray, byteorder=sys.byteorder )
