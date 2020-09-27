@@ -110,20 +110,20 @@ def decode(symbol_string: str, checksum: bool=False, strict: bool=False) -> int:
 
     The decoded string is returned.
     """
-    symbol_string = normalize(symbol_string, strict=strict)
-    if checksum:
-        symbol_string, check_symbol = symbol_string[:-1], symbol_string[-1]
+    #symbol_string = normalize(symbol_string, strict=strict)
+    #if checksum:
+    #    symbol_string, check_symbol = symbol_string[:-1], symbol_string[-1]
 
     number = 0
     for symbol in symbol_string:
         number = number * base + decode_symbols[symbol]
 
-    if checksum:
-        check_value = decode_symbols[check_symbol]
-        modulo = number % check_base
-        if check_value != modulo:
-            raise ValueError("invalid check symbol '%s' for string '%s'" %
-                             (check_symbol, symbol_string))
+    #if checksum:
+    #    check_value = decode_symbols[check_symbol]
+    #    modulo = number % check_base
+    #    if check_value != modulo:
+    #        raise ValueError("invalid check symbol '%s' for string '%s'" %
+    #                         (check_symbol, symbol_string))
 
     return number
 
